@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :players
 
   get 'league' => 'pages#home'
   get 'league/inhouse' => 'pages#inhouse'
