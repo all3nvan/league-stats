@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :players
 
   get 'league' => 'pages#home'
+  get 'league/inhouse' => 'pages#inhouse'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
