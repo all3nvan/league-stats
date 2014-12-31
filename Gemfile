@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0'
 # Use Bootstrap
@@ -25,11 +27,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use MongoDB
-gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
-gem 'bson_ext'
+#gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
+#gem 'bson_ext'
 # Use delayed job
-gem 'delayed_job_mongoid'
-gem 'daemons'
+#gem 'delayed_job_mongoid'
+#gem 'daemons'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
