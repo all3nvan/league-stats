@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'league' => 'pages#home'
+  get 'league/about' => 'pages#about'
   get 'league/inhouse' => 'in_house#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
