@@ -12,8 +12,14 @@ class UpdateJob < ActiveJob::Base
 
     games.each do |game|
     	if game["gameType"] == "CUSTOM_GAME"
-	    	if !Game.exists?(match_id: game["gameId"])	# game is not in database
-
+    		# game is not in database
+	    	if !player.game_stats.exists?(game_id: game["gameId"])
+	    		player.game_stats.build(game_id: game["gameId"],
+	    								kills: game["stats"]["championsKilled"],
+	    								deaths: game["stats"]["numDeaths"],
+	    								assists: game["stats"]["assists"],
+	    								win: game["stats"]["win"],
+	    								champion: game["championId"])
 	    	end
     	end
     end
