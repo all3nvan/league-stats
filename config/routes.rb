@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get 'league/about' => 'pages#about'
   get 'league/inhouse' => 'pages#inhouse'
 
-  resources :games
   resources :players
   resources :game_stats
 
