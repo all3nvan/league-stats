@@ -14,12 +14,8 @@ class UpdateJob < ActiveJob::Base
     	if game["gameType"] == "CUSTOM_GAME"
     		# game is not in database
 	    	if !player.game_stats.exists?(game_id: game["gameId"])
-	    		player.game_stats.build(game_id: game["gameId"],
-	    								kills: game["stats"]["championsKilled"],
-	    								deaths: game["stats"]["numDeaths"],
-	    								assists: game["stats"]["assists"],
-	    								win: game["stats"]["win"],
-	    								champion: game["championId"])
+          inhouseGame = JSON.parse(open("#{RIOT_API_URL}v2.2/match/#{game["gameId"]}").read)
+	    		player.game_stats.create()
 	    	end
     	end
     end

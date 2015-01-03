@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150103143101) do
+ActiveRecord::Schema.define(version: 20150103164107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "champions", force: :cascade do |t|
+    t.integer  "wins"
+    t.integer  "losses"
+    t.integer  "picks"
+    t.integer  "bans"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "champ_id"
+    t.string   "name"
+  end
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -33,8 +44,8 @@ ActiveRecord::Schema.define(version: 20150103143101) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "game_stats", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.float    "kills"
     t.float    "deaths"
     t.float    "assists"
@@ -42,12 +53,9 @@ ActiveRecord::Schema.define(version: 20150103143101) do
     t.integer  "game_id"
     t.boolean  "win"
     t.integer  "champion"
-  end
-
-  create_table "games", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "match_id"
+    t.integer  "wards_placed"
+    t.integer  "pinks"
+    t.integer  "cs"
   end
 
   create_table "players", force: :cascade do |t|
