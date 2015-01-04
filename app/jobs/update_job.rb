@@ -11,13 +11,18 @@ class UpdateJob < ActiveJob::Base
     games = response["games"]
 
     games.each do |game|
-    	if game["gameType"] == "CUSTOM_GAME"
-    		# game is not in database
-	    	if !player.game_stats.exists?(game_id: game["gameId"])
-          inhouseGame = JSON.parse(open("#{RIOT_API_URL}v2.2/match/#{game["gameId"]}").read)
-	    		player.game_stats.create()
-	    	end
+    	if inhouse?(game) && !in_database?(game)
+        inhouseGame = JSON.parse(open("#{RIOT_API_URL}v2.2/match/#{game["gameId"]}").read)
+    		player.game_stats.create(game_id: inhouseGame["gameId"])
     	end
     end
+  end
+
+  def inhouse?(game)
+    (game["gameType"] == "CUSTOM_GAME") && (game["fellowPlayers"].count == 10)
+  end
+
+  def in_database?(game)
+    Game.exists?(game_id: game["gameId"])
   end
 end
