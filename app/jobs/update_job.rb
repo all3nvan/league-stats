@@ -21,10 +21,24 @@ class UpdateJob < ActiveJob::Base
         inhouseGame = JSON.parse(open("#{RIOT_API_URL}v2.2/match/#{game["gameId"]}?api_key=#{API_KEY}").read)
         add_game(inhouseGame)
 
-        # add own stats
+        # add tracked player's stats
         add_game_stats(player, game["championId"], inhouseGame)
 
-        # add fellow player stats
+        # add other players' stats
+        game["fellowPlayers"].each do |otherPlayer|
+          if Player.exists?(summonerId: otherPlayer["summonerId"])
+            add_game_stats(Player.find_by(summonerId: otherPlayer["summonerId"]),
+                           otherPlayer["championId"],
+                           inhouseGame)
+          else
+            name = JSON.parse(open("#{RIOT_API_URL}v1.4/summoner/#{otherPlayer["summonerId"]}/name?api_key=#{API_KEY}").read)
+            new_player = Player.create(summonerId: otherPlayer["summonerId"],
+                                       name: name[otherPlayer["summonerId"].to_s])
+            add_game_stats(new_player, otherPlayer["championId"], inhouseGame)
+
+            numberOfRequests += 1
+          end
+        end
 
         numberOfRequests += 1
     	end
@@ -64,6 +78,7 @@ class UpdateJob < ActiveJob::Base
                              pinks: stats["stats"]["visionWardsBoughtInGame"],
                              wards_placed: stats["stats"]["wardsPlaced"],
                              win: stats["stats"]["winner"],
-                             duration: game["matchDuration"])
+                             duration: game["matchDuration"],
+                             team: game["teamId"])
   end
 end

@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
-  get 'league' => 'pages#home'
-  get 'league/about' => 'pages#about'
-  get 'league/inhouse' => 'pages#inhouse'
+  root 'pages#home'
 
-  resources :players
-  resources :game_stats
+  get 'about' => 'pages#about'
+
+  resources :players, only: [:index, :show]
+  resources :game_stats, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
