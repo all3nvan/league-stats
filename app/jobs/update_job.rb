@@ -59,9 +59,11 @@ class UpdateJob < ActiveJob::Base
                              assists: stats["stats"]["assists"],
                              cs: stats["stats"]["minionsKilled"] +
                                  stats["stats"]["neutralMinionsKilled"],
+                             gold: stats["stats"]["goldEarned"],
                              greens: stats["stats"]["sightWardsBoughtInGame"],
                              pinks: stats["stats"]["visionWardsBoughtInGame"],
                              wards_placed: stats["stats"]["wardsPlaced"],
-                             win: stats["stats"]["winner"])
+                             win: stats["stats"]["winner"],
+                             duration: game["matchDuration"])
   end
 end
