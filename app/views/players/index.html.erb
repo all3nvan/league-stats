@@ -1,5 +1,12 @@
-<ul class="players">
-	<% @players.each do |player| %>
-		<%= link_to player.name, player %><br>
-	<% end %>
-</ul>
+<div class="row">
+	<ul class="players">
+		<% @sorted_winrates.each do |winrate| %>
+			<div class="col-md-1">
+				<%= link_to winrate["object"].name, winrate["object"] %>
+			</div>
+			<div class="col-md-1"><%= winrate["winrate"] %></div>
+			<div class="col-md-1"><%= winrate["wins"] %></div>
+			<div class="col-md-1"><%= winrate["losses"] %></div><br>
+		<% end %>
+	</ul>
+</div>
