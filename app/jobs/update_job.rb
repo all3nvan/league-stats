@@ -16,8 +16,15 @@ class UpdateJob < ActiveJob::Base
 
     games.each do |game|
     	if ( inhouse?(game) && !in_database?(game) )
+        # game = old endpoint
+        # inhouseGame = new endpoint
         inhouseGame = JSON.parse(open("#{RIOT_API_URL}v2.2/match/#{game["gameId"]}?api_key=#{API_KEY}").read)
-    		player.game_stats.create(game_id: inhouseGame["matchId"])
+        add_game(inhouseGame)
+
+        # add own stats
+        add_game_stats(player, game["championId"], inhouseGame)
+
+        # add fellow player stats
 
         numberOfRequests += 1
     	end
@@ -35,6 +42,26 @@ class UpdateJob < ActiveJob::Base
 
   def in_database?(game)
     Game.exists?(game_id: game["gameId"])
-    # HAVENT PUT GAME IDS INTO DATABASE YET SO THIS IS ALWAYS FALSE
+  end
+
+  def add_game(game)
+    Game.create(game_id: game["matchId"])
+    # need bans and other info
+  end
+
+  def add_game_stats(player, champ, game)
+    # match player with correct element of participants array using champion id.
+    stats = game["participants"].select{ |participant| participant["championId"] == champ}[0]
+    player.game_stats.create(game_id: game["matchId"],
+                             champion: stats["championId"],
+                             kills: stats["stats"]["kills"],
+                             deaths: stats["stats"]["deaths"],
+                             assists: stats["stats"]["assists"],
+                             cs: stats["stats"]["minionsKilled"] +
+                                 stats["stats"]["neutralMinionsKilled"],
+                             greens: stats["stats"]["sightWardsBoughtInGame"],
+                             pinks: stats["stats"]["visionWardsBoughtInGame"],
+                             wards_placed: stats["stats"]["wardsPlaced"],
+                             win: stats["stats"]["winner"])
   end
 end
