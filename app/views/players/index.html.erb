@@ -2,21 +2,29 @@
 	<div class="row">
 		<div class="col-md-4"></div>
 		<div class="col-md-1">Summoner</div>
-		<div class="col-md-1">Winrate</div>
-		<div class="col-md-1">Wins</div>
-		<div class="col-md-1">Losses</div>
-		<div class="col-md-4"></div>
+		<div class="col-md-1" align="right">Winrate</div>
+		<div class="col-md-1" align="right">Wins</div>
+		<div class="col-md-1" align="right">Losses</div>
+		<div class="col-md-4" align="right"></div>
 	</div>
 	<% @sorted_winrates.each do |winrate| %>
 		<div class="row">
-			<div class="col-md-4"></div>
+			<div class="col-md-4" align="right">
+				<% if winrate == @sorted_winrates.first %>
+					Lightest
+				<% elsif @sorted_winrates.rindex(winrate) == @sorted_winrates.size / 2 %>
+					Medium Weight
+				<% elsif  winrate == @sorted_winrates.last %>
+					Heaviest
+				<% end %>
+			</div>
 			<div class="col-md-1">
 				<%= link_to winrate["object"].name, winrate["object"] %>
 			</div>
-			<div class="col-md-1"><%= winrate["winrate"] %></div>
-			<div class="col-md-1"><%= winrate["wins"] %></div>
-			<div class="col-md-1"><%= winrate["losses"] %></div>
-			<div class="col-md-4"></div>
+			<div class="col-md-1" align="right"><%= winrate["winrate"] %></div>
+			<div class="col-md-1" align="right"><%= winrate["wins"] %></div>
+			<div class="col-md-1" align="right"><%= winrate["losses"] %></div>
+			<div class="col-md-4" align="right"></div>
 		</div>
 	<% end %>
 </ul>
