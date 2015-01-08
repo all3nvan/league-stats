@@ -1,30 +1,27 @@
-<ul class="players">
-	<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-2">Summoner</div>
-		<div class="col-md-1" align="right">Winrate</div>
-		<div class="col-md-1" align="right">Wins</div>
-		<div class="col-md-1" align="right">Losses</div>
-		<div class="col-md-4" align="right"></div>
-	</div>
-	<% @sorted_winrates.each do |winrate| %>
-		<div class="row">
-			<div class="col-md-3" align="right">
-				<% if winrate == @sorted_winrates.first %>
-					Lightest
-				<% elsif @sorted_winrates.rindex(winrate) == @sorted_winrates.size / 2 %>
-					Medium Weight
-				<% elsif  winrate == @sorted_winrates.last %>
-					Heaviest
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Weight</th>
+					<th>Summoner</th>
+					<th>Winrate</th>
+					<th>Wins</th>
+					<th>Losses</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @sorted_winrates.each_index do |i| %>
+					<tr>
+						<td><%= i %>Heavy</td>
+						<td><%= link_to @sorted_winrates[i]["object"].name,
+										@sorted_winrates[i]["object"] %></td>
+						<td align="right"><%= @sorted_winrates[i]["winrate"] %></td>
+						<td align="right"><%= @sorted_winrates[i]["wins"] %></td>
+						<td align="right"><%= @sorted_winrates[i]["losses"] %></td>
+					</tr>
 				<% end %>
-			</div>
-			<div class="col-md-2">
-				<%= link_to winrate["object"].name, winrate["object"] %>
-			</div>
-			<div class="col-md-1" align="right"><%= winrate["winrate"] %></div>
-			<div class="col-md-1" align="right"><%= winrate["wins"] %></div>
-			<div class="col-md-1" align="right"><%= winrate["losses"] %></div>
-			<div class="col-md-4" align="right"></div>
-		</div>
-	<% end %>
-</ul>
+			</tbody>
+		</table>
+	</div>
+</div>

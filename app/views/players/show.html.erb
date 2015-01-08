@@ -1,3 +1,47 @@
-<ul class="player">
-	<%= @player.name %>
-</ul>
+<div class="row">
+	<div class="col-md-12" align="center"><h1><%= @player.name %></h1></div>
+</div>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Champion</th>
+					<th>Games</th>
+					<th>Winrate</th>
+					<th>Wins</th>
+					<th>Losses</th>
+					<th>Kills</th>
+					<th>Deaths</th>
+					<th>Assists</th>
+					<th>CS</th>
+					<th>Gold</th>
+					<th>Wards</th>
+					<th>Greens</th>
+					<th>Pinks</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @sorted_champ_stats.each do |champ| %>
+					<tr>
+						<td><%= champ["champion"] %></td>
+						<td align="right"><%= champ["games"] %></td>
+						<td align="right">
+							<%= (champ["wins"].to_f / champ["games"]).round(1) * 100 %>
+						</td>
+						<td align="right"><%= champ["wins"] %></td>
+						<td align="right"><%= champ["losses"] %></td>
+						<td align="right"><%= champ["kills"] %></td>
+						<td align="right"><%= champ["deaths"] %></td>
+						<td align="right"><%= champ["assists"] %></td>
+						<td align="right"><%= champ["cs"] %></td>
+						<td align="right"><%= champ["gold"] %></td>
+						<td align="right"><%= champ["wards_placed"] %></td>
+						<td align="right"><%= champ["greens"] %></td>
+						<td align="right"><%= champ["pinks"] %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
