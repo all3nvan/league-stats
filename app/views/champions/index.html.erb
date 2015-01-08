@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="col-md-12" align="center">
+		<%= link_to "By Summoner", players_path %> | By Champion
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Champion</th>
+					<th>Contests</th>
+					<th>Contest Rate</th>
+					<th>Picks</th>
+					<th>Bans</th>
+					<th>Winrate</th>
+					<th>Wins</th>
+					<th>Losses</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @sorted_champ_stats.each do |champ| %>
+					<tr>
+						<td><%= champ["champion"] %></td>
+						<td><%= champ["contests"] %></td>
+						<td><%= champ["contest_rate"] %></td>
+						<td><%= champ["picks"] %></td>
+						<td><%= champ["bans"] %></td>
+						<td><%= champ["winrate"] %></td>
+						<td><%= champ["wins"] %></td>
+						<td><%= champ["losses"] %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

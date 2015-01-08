@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get 'about' => 'pages#about'
+  get 'champions' => 'champions#index'
 
   resources :players, only: [:index, :show]
   resources :game_stats, only: [:index, :show]

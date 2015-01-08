@@ -22,12 +22,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% @sorted_champ_stats.each do |champ| %>
+				<% @sorted_stats.each do |champ| %>
 					<tr>
 						<td><%= champ["champion"] %></td>
 						<td align="right"><%= champ["games"] %></td>
 						<td align="right">
-							<%= (champ["wins"].to_f / champ["games"]).round(1) * 100 %>
+							<%= (champ["wins"].to_f / champ["games"] * 100).round(1) %>
 						</td>
 						<td align="right"><%= champ["wins"] %></td>
 						<td align="right"><%= champ["losses"] %></td>

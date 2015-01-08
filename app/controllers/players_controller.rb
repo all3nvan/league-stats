@@ -7,7 +7,7 @@ class PlayersController < ApplicationController
 
 	def show
 		@player = Player.find(params[:id])
-		@sorted_champ_stats = get_champ_stats(@player)
+		@sorted_stats = get_stats(@player)
 	end
 
 	def get_winrates(players)
@@ -21,7 +21,7 @@ class PlayersController < ApplicationController
 		winrates.sort_by{ |player| player["winrate"] }.reverse
 	end
 
-	def get_champ_stats(player)
+	def get_stats(player)
 		champs_played = $champion_map.select do |id, name|
 			player.game_stats.exists?(champion: id)
 		end
