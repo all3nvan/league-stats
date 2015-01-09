@@ -78,8 +78,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-#production:
-  #<<: *default
-  #database: league_stats_production
+production:
+  <<: *default
+  database: league_stats_production
   #username: league_stats
   #password: <%= ENV['LEAGUE_STATS_DATABASE_PASSWORD'] %>
