@@ -6,5 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Player.create!(name: "all3nvan", summonerId: 23472148)
-Player.create!(name: "edzwoo", summonerId: 38049106)
+#Player.create!(name: "all3nvan", summonerId: 23472148)
+#Player.create!(name: "edzwoo", summonerId: 38049106)
+
+$champion_map.each do |id, name|
+
+end
