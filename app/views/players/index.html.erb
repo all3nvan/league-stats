@@ -8,7 +8,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Weight</th>
+					<th>Rank</th>
 					<th>Summoner</th>
 					<th>Winrate</th>
 					<th>Wins</th>
@@ -18,7 +18,7 @@
 			<tbody>
 				<% @sorted_winrates.each_index do |i| %>
 					<tr>
-						<td><%= i %>Heavy</td>
+						<td><%= i + 1 %></td>
 						<td><%= link_to @sorted_winrates[i]["object"].name,
 										@sorted_winrates[i]["object"] %></td>
 						<td align="right"><%= @sorted_winrates[i]["winrate"] %></td>
