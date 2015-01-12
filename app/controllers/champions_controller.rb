@@ -4,10 +4,15 @@ class ChampionsController < ApplicationController
 		@champs_contested = $champion_map.select do |id, name|
 			GameStat.exists?(champion: id)
 		end
-		@sorted_champ_stats = get_champ_stats(@champs_contested)
+		@sorted_champ_stats = get_all_champ_stats(@champs_contested)
 	end
 
-	def get_champ_stats(champs)
+	def show
+		@champion = Champion.find(params[:id])
+		@sorted_player_stats = get_player_stats(@champion)
+	end
+
+	def get_all_champ_stats(champs)
 		champ_stats = champs.map do |id, name|
 			times_banned = Game.where("blue_1 = ? OR
 									   blue_2 = ? OR
@@ -27,6 +32,17 @@ class ChampionsController < ApplicationController
 			 "losses" => GameStat.where("champion = ? AND win = ?", id, false).count}
 		end
 		champ_stats.sort_by{ |champ| champ["contests"] }.reverse
+	end
+
+	def get_player_stats(champ)
+		player_stats = []
+		Player.find_each do |player|
+			if player.game_stats.exists?(champion: champ.champ_id)
+				player_stats << [player.name, player.get_champ_stats(champ.champ_id, champ.name)]
+			end
+		end
+		player_stats.sort_by{ |player| player[1]["wins"] }.
+					 sort_by{ |player| player[1]["games"] }.reverse
 	end
 
 end

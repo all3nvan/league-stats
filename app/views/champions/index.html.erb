@@ -21,7 +21,10 @@
 			<tbody>
 				<% @sorted_champ_stats.each do |champ| %>
 					<tr>
-						<td><%= champ["champion"] %></td>
+						<td>
+							<% champion = Champion.find_by(name: champ["champion"]) %>
+							<%= link_to champ["champion"], champion %>
+						</td>
 						<td><%= champ["contests"] %></td>
 						<td><%= champ["contest_rate"] %></td>
 						<td><%= champ["picks"] %></td>

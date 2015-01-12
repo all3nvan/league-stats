@@ -10,5 +10,5 @@
 #Player.create!(name: "edzwoo", summonerId: 38049106)
 
 $champion_map.each do |id, name|
-
+	Champion.create!(champ_id: id, name: name)
 end
