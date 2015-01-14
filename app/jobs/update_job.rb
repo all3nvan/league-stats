@@ -4,7 +4,8 @@ class UpdateJob < ActiveJob::Base
   require 'json'
 
   RIOT_API_URL = "https://na.api.pvp.net/api/lol/na/"
-  API_KEY = "f7e80d6f-340b-450a-b2aa-12ba2e8e6da8"
+  #API_KEY = "f7e80d6f-340b-450a-b2aa-12ba2e8e6da8"
+  API_KEY = APP_CONFIG["API_KEY"]
   RUN_EVERY = 1.hour
 
   def perform(player)
