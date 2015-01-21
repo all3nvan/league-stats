@@ -2,7 +2,8 @@ class PlayersController < ApplicationController
 
 	def index
 		@players = Player.all
-		@sorted_winrates = get_winrates(@players)
+		#@minimum = params[:minimum].nil? ? 5 : params[:minimum]
+		@sorted_winrates = get_winrates(@players)#, @minimum)
 	end
 
 	def show
@@ -10,7 +11,7 @@ class PlayersController < ApplicationController
 		@sorted_stats = @player.get_stats
 	end
 
-	def get_winrates(players)
+	def get_winrates(players)#, min)
 		winrates = players.map do |player|
 			{"object" => player,
 			 "wins" => player.game_stats.where("win = ?", true).count,
