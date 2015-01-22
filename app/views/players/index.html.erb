@@ -1,8 +1,9 @@
 <div class="row">
 	<div class="col-md-4 col-md-offset-4" align="center">
 		<%= form_tag(players_path, method: "get") do %>
-			<%= label_tag(:minimum, "Minimum games: (default = 5)") %>
-			<%= number_field(:minimum, value: 5, in: 1..100, step: 1) %>
+			<%= label_tag(:minimum, "Minimum games:") %>
+			<% default = params[:minimum].nil? ? 5 : params[:minimum].to_i %>
+			<%= number_field_tag(:minimum, default, {in: 1..100, step: 1}) %>
 		<% end %>
 	</div>
 </div>
