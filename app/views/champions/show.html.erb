@@ -24,21 +24,21 @@
 			<tbody>
 				<% @sorted_player_stats.each do |player| %>
 					<tr>
-						<td><%= player[0] %></td>
-						<td align="right"><%= player[1]["games"] %></td>
+						<td><%= player["object"].name %></td>
+						<td align="right"><%= player["stats"]["games"] %></td>
 						<td align="right">
-							<%= (player[1]["wins"].to_f / player[1]["games"] * 100).round(1) %>
+							<%= (player["stats"]["wins"].to_f / player["stats"]["games"] * 100).round(1) %>
 						</td>
-						<td align="right"><%= player[1]["wins"] %></td>
-						<td align="right"><%= player[1]["losses"] %></td>
-						<td align="right"><%= player[1]["kills"] %></td>
-						<td align="right"><%= player[1]["deaths"] %></td>
-						<td align="right"><%= player[1]["assists"] %></td>
-						<td align="right"><%= player[1]["cs"] %></td>
-						<td align="right"><%= player[1]["gold"] %></td>
-						<td align="right"><%= player[1]["wards_placed"] %></td>
-						<td align="right"><%= player[1]["greens"] %></td>
-						<td align="right"><%= player[1]["pinks"] %></td>
+						<td align="right"><%= player["stats"]["wins"] %></td>
+						<td align="right"><%= player["stats"]["losses"] %></td>
+						<td align="right"><%= player["stats"]["kills"] %></td>
+						<td align="right"><%= player["stats"]["deaths"] %></td>
+						<td align="right"><%= player["stats"]["assists"] %></td>
+						<td align="right"><%= player["stats"]["cs"] %></td>
+						<td align="right"><%= player["stats"]["gold"] %></td>
+						<td align="right"><%= player["stats"]["wards_placed"] %></td>
+						<td align="right"><%= player["stats"]["greens"] %></td>
+						<td align="right"><%= player["stats"]["pinks"] %></td>
 					</tr>
 				<% end %>
 			</tbody>
