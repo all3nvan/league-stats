@@ -35,12 +35,11 @@ class ChampionsController < ApplicationController
 	end
 
 	def get_player_stats(champ)
-		ids = GameStat.where("champion = ?", champ.champ_id).select(:id, :player_id).group(:player_id).sum(:id)
-		player_stats = Array.new
-		ids.each_key do |id|
-			player = Player.find(id)
-			player_stats << {"object" => player,
-							 "stats" => player.get_champ_stats(champ.champ_id, champ.name)}
+		ids = GameStat.where("champion = ?", champ.champ_id).select(:player_id).group(:player_id).to_a
+		player_stats = ids.map do |id|
+			player = Player.find(id.player_id)
+			{"object" => player,
+			 "stats" => player.get_champ_stats(champ.champ_id, champ.name)}
 		end
 		player_stats.sort_by{ |player| player["stats"]["wins"] }.
 					 sort_by{ |player| player["stats"]["games"] }.reverse
