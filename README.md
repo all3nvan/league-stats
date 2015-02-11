@@ -1,28 +1,5 @@
-== README
+An application created with Ruby on Rails using a PostgreSQL database to track League of Legends games played between my friends and I.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The database is initially seeded with a couple of accounts that will be tracked.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+A background job using delayed_job as the queue adapter is queued to periodically make requests to the Riot Games API to check if custom games have been played on the tracked accounts.
